@@ -13,4 +13,4 @@ while True:
 if attempt == 1:
     print(f"Correct! It only took you one single attempt!")
 else:
-    print(f"Correct! It took you {attempt} attempts")
+    print(f"Correct! It took you {attempt} attempts")   
