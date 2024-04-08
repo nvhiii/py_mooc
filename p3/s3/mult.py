@@ -1,4 +1,5 @@
 # Write your solution here
+# Please write a program which asks the user for a positive integer number. The program then prints out a list of multiplication operations until both operands reach the number given by the user. See the examples below for details:
 num = int(input("Please type in a number: "))
 first_operand = 1
 second_operand = 1
