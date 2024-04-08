@@ -1,13 +1,21 @@
-# Write your solution here
-# Please write a program which asks the user for a positive integer number. The program then prints out a list of multiplication operations until both operands reach the number given by the user. See the examples below for details:
-num = int(input("Please type in a number: "))
-first_operand = 1
-second_operand = 1
+product = 1
+# prompt for infinite input until break cond is met
+while True:
 
-while first_operand <= num:
-    print(f"{first_operand} x {second_operand} = {first_operand * second_operand}")
-    first_operand += 1
-    second_operand += 1
+    # prompt num
+    num = int(input("Please type in a number: "))
+    temp = num
 
+    if num == 0 or num < 0:
+        break
+
+    # calculate factorial
+    while num >= 1:
+        product *= num
+        num -= 1
     
-# WIP
+    # prnt
+    print(f"The factorial of the number {temp} is {product}")
+    product = 1 # IMPORTANT TO INCLUDE, NEED TO RESET VALUE OF PRODUCT
+
+print(f"Thanks and bye!")
