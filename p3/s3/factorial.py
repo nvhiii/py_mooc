@@ -17,12 +17,12 @@
 # Please type in a number: -1
 # Thanks and bye!
 
-num = int(input("Please type in a number: "))
 product = 1
 
-# check num entered is greater than and not equal to 0
+# input has to be inside loop
 while True:
 
+    num = int(input("Please type in a number: "))
     # calculate factorial
     next_factor = 1
     while next_factor <= num:
@@ -36,4 +36,3 @@ while True:
     print(f"The factorial of the number {num} is {product}")
 
 print(f"Thanks and bye!")
-        
