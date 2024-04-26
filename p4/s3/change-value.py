@@ -18,3 +18,4 @@ while True:
 
     new_val = int(input("New value:"))
     my_list[index] = new_val
+    print(my_list)
