@@ -11,26 +11,23 @@
 
 def longest_series_of_neighbours(list):
 
+    longest = 1
+    nextResult = 1
     iterator = 0
-    nextIndex = iterator + 1
-    longestNeighbors = []
+    
+    # start iterating list at 1, bc u wanna compare to num before
+    for iterator in range(1, len(list)):
 
+        # now start incrementing the resulting neighbors list length
+        if (abs(list[iterator-1] - list[iterator]) == 1):
+            nextResult += 1
+        else:
+            nextResult = 1
 
-    while iterator < len(list):
+        # recursive call to assign longest 
+        longest = max(longest, nextResult)
 
-        # currently, code is skipping over the index that are not within +-1 range, 
-        # then appending longest.
-        # need to add cond to just store the curr list, then check if new neighbors comes up.
-        # if that set of neighbors is longer than one in memory, it overwrites.
-
-        # first find 1st contiguous set of neighbors, set as longest, and store string,
-        # next check if next string i
-        if (list[iterator] - list[nextIndex] == 1 or list[nextIndex] - list[iterator] == 1):
-            longestNeighbors.append(list[iterator])
-
-        iterator += 1
-
-    return longestNeighbors
+    return longest
 
 if __name__ == "__main__":
     myList = [1, 2, 5, 7, 6, 5, 6, 3, 4, 1, 0]
