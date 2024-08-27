@@ -1,20 +1,39 @@
-# Write your solution here
-word = input("Word: ")
-ast = "*"
-blank = " "
-height = 0
-btwn_ast = 28
-space_diff = btwn_ast - len(word)
-w2a = space_diff // 2 # w2a = word-to-asterik
+# Please write a program which asks the user for a string and then prints 
+# out a frame of * characters with the word in 
+# the centre. The width of the frame should be 30 characters. You may assume 
+# the input string will always fit inside the frame.
 
-while height < 3:
-    if height == 0 or height == 2:
-        print(f"{ast * 30}")
-    else:
-        # check if dividing by 2 leaves float or int
-        if space_diff % 2 == 0:
-            print(f"{ast}{w2a * blank}{word}{w2a * blank}{ast}")
-        else:
-            print(f"{ast}{(w2a + 1) * blank}{word}{(w2a) * blank}{ast}")
+# If the length of the input string is an odd number, you may print out 
+# the word in either of the two possible centre locations.
 
-    height += 1
+# Word: testing
+
+# ******************************
+# *          testing           *
+# ******************************
+
+# Word: python
+
+# ******************************
+# *           python           *
+# ******************************
+
+ustr = input("Word: ")
+
+# frame top
+print(30*"*")
+
+# frame on right and left of word
+whitespace = 30 - 2 - len(ustr) # the 30 is max, 2 is the right and left borders w/ width of 1 each
+
+if len(ustr) % 2 == 0:
+    blanks = (whitespace//2) * " "
+    print(f"*{blanks}{ustr}{blanks}*")
+else:
+    blanks_l = (whitespace//2 + 1) * " "
+    blanks_r = (whitespace//2) * " "
+    middle = f"*{blanks_l}{ustr}{blanks_r}*"
+    print(f"{middle}")
+
+# frame bottom
+print(30*"*")
