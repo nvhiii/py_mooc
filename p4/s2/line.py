@@ -17,7 +17,7 @@
 
 def line(times, ustr):
 
-    print(times*ustr)
-
-if __name__ == "__main__":
-    line(7, "%")
+    if ustr=="":
+        print(f"*" * times)
+    else:
+        print(times*ustr[0])
