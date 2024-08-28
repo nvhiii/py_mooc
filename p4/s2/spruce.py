@@ -1,29 +1,36 @@
-# Please write a function named spruce, which takes one argument.
-# The function prints out the text a spruce!, and the a spruce 
-# tree, the size of which is specified by the argument.
+# Please write a function named spruce, which takes one 
+# argument. The function prints out the text a spruce!, and 
+# the a spruce tree, the size of which is specified by the argument.
 
-# Write your solution here
-def spruce(num):
-    i = 0
-    MAX_WIDTH = 2 * num # we dont add the + 1 bc we added into the string directly
-    print(f"a spruce!")
-    # since the things iterate by 2n + 1
-    while i < num:
+# Calling spruce(3) should print out
 
-        line = f"*" * 2 * i + (f"*" * 1)
+# a spruce!
+#   *
+#  ***
+# *****
+#   *
 
-        if i != num - 1:
-            whitespace = (MAX_WIDTH - len(line)) // 2
-            print((f" " * whitespace) + line)
-        else:
-            print(line)
-        i += 1
-    
-    # print log of the tree
-    ws2 = (MAX_WIDTH - 1) // 2
-    print((f" " * ws2) + "*")
-    
+# Calling spruce(5) should print out
 
-# You can test your function by calling it within the following block
+# a spruce!
+#     *
+#    ***
+#   *****
+#  *******
+# *********
+#     *
+
+def spruce(dim):
+
+    print("a spruce!")
+    # 1 + 2n, where n is 0
+    num = 0
+    while num < dim:
+        whitespace = dim - num - 1 # calculates amt of whitespace to left
+        print((whitespace * " ") + (2 * num * "*") + "*") # prints asterik num times
+        num += 1 # increment num of stars per row
+    print(((dim - 1) * " ") + "*")
+
 if __name__ == "__main__":
-    spruce(5)
+    num = int(input("Enter a dimension for the spruce: "))
+    spruce(num)
