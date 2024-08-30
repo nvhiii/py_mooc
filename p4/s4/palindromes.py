@@ -1,27 +1,34 @@
-# Write your solution here
-# Please write a function named palindromes, which 
-# takes a string argument and returns True if the string 
-# is a palindrome. Palindromes are words which are spelled 
-# exactly the same backwards and forwards.
+# Please write a function named palindromes, which takes a string argument 
+# and returns True if the string is a palindrome. Palindromes are words 
+# which are spelled exactly the same backwards and forwards.
 
-def palindromes(str):
-    
-    return str == str[::-1]
+# Please also write a main program which asks the user to type in words 
+# until they type in a palindrome:
+
+# Please type in a palindrome: python
+# that wasn't a palindrome
+# Please type in a palindrome: java
+# that wasn't a palindrome
+# Please type in a palindrome: oddoreven
+# that wasn't a palindrome
+# Please type in a palindrome: neveroddoreven
+# neveroddoreven is a palindrome!
+
+# logic to check if palindrome
+def palindromes(val: str) -> bool:
+    return val == val[::-1]
 
 def main():
-    
+
     while True:
-        word = input("Please type in a palindrome: ")
 
-        if palindromes(word):
-            print(f"{word} is a palindrome!")
+        ustr = input("Please type in a palindrome: ")
+
+        if palindromes(ustr):
             break
-        else:
-            print("that wasn't a palindrome")
 
-# dont forget to invoke the main method!
+        print("that wasn't a palindrome")
+
+    print(f"{ustr} is a palindrome!")
+
 main()
-
-# Note, that at this time the main program should not be written inside
-# if __name__ == "__main__":
-# block!
