@@ -1,6 +1,6 @@
-# Please write a program which asks the user to type in values 
-# and adds them to a list. After each addition, the list is printed out 
-# in two different ways:
+# Please write a program which asks the user to type in values and adds 
+# them to a list. After each addition, the list is printed out in two 
+# different ways:
 
 # in the order the items were added
 # ordered from smallest to greatest
@@ -23,19 +23,18 @@
 # New item: 0
 # Bye!
 
-my_list = []
+regular = []
 
 while True:
 
-    num = int(input("New item: "))
-    if num == 0:
-        print("Bye!")
+    item = int(input("New item: "))
+
+    if item == 0:
         break
 
-    my_list.append(num)
-    sort_list = sorted(my_list)
-    print(f"The list now: {my_list}")
-    print(f"The list in order: {sort_list}")
-        
+    regular.append(item)
+    
+    print(f"The list now: {regular}")
+    print(f"The list in order: {sorted(regular)}")
 
-
+print("Bye!")
