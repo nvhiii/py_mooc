@@ -1,18 +1,23 @@
-# Please write a function named no_vowels, which takes a 
-# string argument. The function returns a new string, which 
-# should be the same as the original but with all vowels removed.
+# Please write a function named no_vowels, which takes a string argument. 
+# The function returns a new string, which should be the same as the original 
+# but with all vowels removed.
 
-# You can assume the string will contain only characters from the 
-# lowercase English alphabet a...z.
+# You can assume the string will contain only characters from the lowercase 
+# English alphabet a...z.
 
-def no_vowels(string):
+# An example of expected behaviour:
 
-    mystr = string
+# my_string = "this is an example"
+# print(no_vowels(my_string))
 
-    mystr = mystr.replace("a", "")
-    mystr = mystr.replace("e", "")
-    mystr = mystr.replace("i", "")
-    mystr = mystr.replace("o", "")
-    mystr = mystr.replace("u", "")
+# ths s n xmpl
 
-    return mystr
+def no_vowels(ustr: str) -> str:
+    # Replace each vowel with an empty string
+    ustr = ustr.replace("a", "")
+    ustr = ustr.replace("e", "")
+    ustr = ustr.replace("i", "")
+    ustr = ustr.replace("o", "")
+    ustr = ustr.replace("u", "")
+
+    return ustr
