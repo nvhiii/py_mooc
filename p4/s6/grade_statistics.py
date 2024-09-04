@@ -1,112 +1,113 @@
-    # In this exercise you will write a program for printing out grade 
-    # statistics for a university course.
+# In this exercise you will write a program for printing out grade statistics for a university course.
 
-    # The program asks the user for results from different students 
-    # on the course. These include exam points and numbers of 
-    # exercises completed. The program then prints out statistics based on the results.
+# The program asks the user for results from different students on the course. These include exam points and numbers of exercises completed. The program then prints out statistics based on the results.
 
-    # Exam points are integers between 0 and 20. The number of 
-    # exercises completed is an integer between 0 and 100.
+# Exam points are integers between 0 and 20. The number of exercises completed is an integer between 0 and 100.
 
-    # The program keeps asking for input until the user types in 
-    # an empty line. You may assume all lines contain valid input, 
-    # which means that there are two integers on each line, or the line is empty.
+# The program keeps asking for input until the user types in an empty line. You may assume all lines contain valid input, which means that there are two integers on each line, or the line is empty.
 
-    def grade_statistics():
+# And example of how the data is typed in:
 
-        pts_sum = 0
-        num_students = 0
-        passed = 0
-        zero = 0
-        one = 0
-        two = 0
-        three = 0
-        four = 0
-        five = 0
+# Exam points and exercises completed: 15 87
+# Exam points and exercises completed: 10 55
+# Exam points and exercises completed: 11 40
+# Exam points and exercises completed: 4 17
+# Exam points and exercises completed:
+# Statistics:
 
-        while (True):
-            
-            points_exercises = input("Exam points and exercises completed: ")
+# When the user types in an empty line, the program prints out statistics. They are formulated as follows:
 
-            # break cond
-            if (points_exercises == ""):
-                break
+# The exercises completed are converted into exercise points, so that completing at least 10% of the exercises grants one point, 20% grants two points, and so forth. Completing all 100 exercises grants 10 exercise points. The number of exercise points granted is an integer value, rounded down.
 
-            # now split this string, idx 0 is exam pts and 1 is exercises completed
-            split_array = points_exercises.split(" ")
+# The grade for the course is determined based on the following table:
 
-            # exam points can be max 20, right into sum
-            exam_pts = int(split_array[0])
-            # exercise points need to be converted further
-            exercise_pts = int(split_array[1])
-            
-            if (exercise_pts / 100 == 1):
-                exercise_pts = 10
-            elif (exercise_pts / 100 >= 0.9):
-                exercise_pts = 9
-            elif (exercise_pts / 100 >= 0.8):
-                exercise_pts = 8
-            elif (exercise_pts / 100 >= 0.7):
-                exercise_pts = 7
-            elif (exercise_pts / 100 >= 0.6):
-                exercise_pts = 6
-            elif (exercise_pts / 100 >= 0.5):
-                exercise_pts = 5
-            elif (exercise_pts / 100 >= 0.4):
-                exercise_pts = 4
-            elif (exercise_pts / 100 >= 0.3):
-                exercise_pts = 3
-            elif (exercise_pts / 100 >= 0.2):
-                exercise_pts = 2
-            elif (exercise_pts / 100 >= 0.1):
-                exercise_pts = 1
-            else:
-                exercise_pts = 0
+# exam points + exercise points	grade
+# 0–14	0 (i.e. fail)
+# 15–17	1
+# 18–20	2
+# 21–23	3
+# 24–27	4
+# 28–30	5
 
-            raw_grade = exam_pts + exercise_pts
-            # this is running pts sum for all students
-            pts_sum += raw_grade
+# There is also an exam cutoff threshold. If a student received less than 10 points from the exam, they automatically fail the course, regardless of their total number of points.
 
-            if (exam_pts < 10 or (raw_grade <= 14 and raw_grade >= 0)):
-                grade = 0
-                zero += 1
-            elif (raw_grade <= 17 and raw_grade >= 15):
-                grade = 1
-                passed += 1
-                one += 1
-            elif (raw_grade <= 20 and raw_grade >= 18):
-                grade = 2
-                passed += 1
-                two += 1 
-            elif (raw_grade <= 23 and raw_grade >= 21):
-                grade = 3
-                passed += 1
-                three += 1
-            elif (raw_grade <= 27 and raw_grade >= 24):
-                grade = 4
-                passed += 1
-                four += 1
-            else:
-                grade = 5
-                passed += 1
-                five += 1
+# With the example input from above the program would print out the following statistics:
 
-            # iterate per student
-            num_students += 1
+# Statistics:
+# Points average: 14.5
+# Pass percentage: 75.0
+# Grade distribution:
+#   5:
+#   4:
+#   3: *
+#   2:
+#   1: **
+#   0: *
 
-        print("Statistics")
-        print("Points average: " + (1.0 * pts_sum / num_students))
-        print("Pass percentage: " + (1.0 * passed / num_students))
-        print("Grade distribution:")
-        print(f'\t5: {five*"*"}')
-        print(f'\t5: {four*"*"}')
-        print(f'\t5: {three*"*"}')
-        print(f'\t5: {two*"*"}')
-        print(f'\t5: {one*"*"}')
-        print(f'\t5: {zero*"*"}')
+# Floating point numbers should be printed out with one decimal precision.
 
-    def main():
-        grade_statistics()
+# NB: this exercise doesn't ask you to write any specific functions, so you should not place any code within an if __name__ == "__main__" block. If any functionality in your program is e.g. in the main function, you should include the code calling this function normally, and not contain it in an if block like in the exercises which specify certain functions.
 
-    main()
+# Hint:
 
+# The user input in this program consists of lines with two integer values:
+
+# Exam points and exercises completed: 15 87
+
+# You have to first split the input line in two and then convert the sections into integers with the int function. Splitting the input can be achieved in the same way as in the exercise First, second and last words, but there is a simpler way as well. The string method split will chop the input up nicely. You will find more information by searching for python string split online.
+def pts_ex():
+
+    # read in a string with whitespace
+    # get values here
+    # store the values in unique lists
+    exam_list = []
+    exercise_list = []
+    while True:
+        val = input("Exam points and exercises completed: ")
+        # break cond
+        if not val: # same as saying if val == ""
+            break
+        # handle valid input
+        split = val.split() # splits using default whitespace
+        # assuming all lines contain valid input
+        exam_points = split[0]
+        exam_list.append(exam_points)
+        num_exercises = split[1]
+        exercise_list.append(num_exercises)
+
+# converts list of exercises completes exercises completed into 
+# a list exercise points
+def conversion(my_exercises: list) -> list:
+
+    ex_points = []
+    # definitive iterations
+    for exercise in range(my_exercises):
+        if exercise / 100 == 1:
+            ex_points.append(10) # 10 points
+        elif exercise / 100 >= 0.9:
+            ex_points.append(9)
+        elif exercise / 100 >= 0.8:
+            ex_points.append(8)
+        elif exercise / 100 >= 0.7:
+            ex_points.append(7)
+        elif exercise / 100 >= 0.6:
+            ex_points.append(6)
+        elif exercise / 100 >= 0.5:
+            ex_points.append(5)
+        elif exercise / 100 >= 0.4:
+            ex_points.append(4)
+        elif exercise / 100 >= 0.3:
+            ex_points.append(3)
+        elif exercise / 100 >= 0.2:
+            ex_points.append(2)
+        elif exercise / 100 >= 0.1:
+            ex_points.append(1)
+        else:
+            ex_points.append(0)
+
+    return ex_points
+    
+# now conv
+
+
+        
