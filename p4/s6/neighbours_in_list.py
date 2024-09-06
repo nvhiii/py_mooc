@@ -17,18 +17,17 @@
 
 # # 4
 
-def longest_series_of_neighbours(my_list: list) -> int:
+def longest_series_of_neighbors(my_list: list) -> int:
 
-    max_length = 1 # why are these one
-    current_length = 1 # why are these one
+    max_length = 1 # assumes list are valid
+    current_length = 1
 
-    for i in range(1, len(my_list)):
-        if abs(my_list[i] - my_list[i - 1]) == 1:
+    for i in range(len(my_list)):
+        if abs(my_list[i] - my_list[i-1]) == 1: # diff between idx i+1 and i must be 1 
             current_length += 1
         else:
-            max_length = max(max_length, current_length) # using max fxn to check which is the max
-            current_length = 1 # reset when current length diff isnt abs of 1
-
-    max_length = max(max_length, current_length) # need to review why this is the case
+            max_length = max(max_length, current_length) # do comparision and find max here
+            current_length = 1 # reset here
+    
+    max_length = max(max_length, current_length)
     return max_length
-
