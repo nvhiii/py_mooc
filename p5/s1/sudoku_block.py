@@ -23,13 +23,10 @@
 # True
 
 def block_correct(sudoku: list, row_no: int, column_no: int) -> bool:
-
-    # first create the 3x3 matrix, row_no x column_no, dont need to create, go to it
     block = []
-    for i in range(row_no, row_no + 3):
-        for j in range(column_no, column_no + 3):
-            block.append(sudoku[i][j])
+    for row in range(sudoku[row_no], sudoku[row_no+3]):
+        for num in range(row[column_no], row[column_no+3]):
+            block[row][num] = num
 
-    non_zeros = [i for i in block if i != 0]
-
+    non_zeros = [num for num in block if num != 0]
     return len(non_zeros) == len(set(non_zeros))
