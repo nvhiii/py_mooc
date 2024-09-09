@@ -66,13 +66,17 @@ def block_correct(sudoku: list, row_no: int, column_no: int) -> bool:
 
 def sudoku_grid_correct(sudoku: list) -> bool:
 
-    # 3 bool values must eval to true
+    for row in range(9): # iterate all items of sudoku
+        if not row_correct(sudoku, row):
+            return False
 
-    # row check
-    for m in sudoku:
-        row_correct(sudoku, m)
+    for col in range(9):
+        if not column_correct(sudoku, col):
+            return False
 
-    for m in sudoku:
-        column_correct(sudoku, m)
-
+    for row in range(0, 9, 3):
+        for col in range(0, 9, 3):
+            if not block_correct(sudoku, row, col):
+                return False
     
+    return True
