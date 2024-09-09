@@ -9,21 +9,19 @@
 
 # The function should return the value 1 if player 1 won, and the value 2 if player 2 won. If both players have the same number of pieces on the board, the function should return the value 0.
 
-def who_won(game_board: list):
-
-    # count # of stones each player has 
-    blacks = 0
-    whites = 0
+def who_won(game_board: list) -> int:
+    p1 = 0
+    p2 = 0
     for row in game_board:
-        for stone in row:
-            if stone == 2:
-                blacks += 1
-            elif stone == 1:
-                whites += 1
+        for val in row:
+            if val == 1:
+                p1 += 1
+            elif val == 2:
+                p2 += 1
 
-    if blacks == whites:
+    if p1 == p2:
         return 0
-    elif blacks > whites:
-        return 2
-    else:
+    elif p1 > p2:
         return 1
+    else:
+        return 2
