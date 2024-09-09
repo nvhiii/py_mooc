@@ -13,11 +13,10 @@
 
 def count_matching_elements(my_matrix: list, element: int) -> int:
 
-    # basically count the number of times the specified item shows up in the matrix
     count = 0
-    for row in my_matrix: # iterate each row, 1 at time
-        for item in row:
-            if item == element:
+    for row in my_matrix:
+        for n in range(len(row)):
+            if row[n] == element:
                 count += 1
 
     return count
