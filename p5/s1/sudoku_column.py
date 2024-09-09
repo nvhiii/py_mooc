@@ -18,10 +18,9 @@
 # True
 
 def column_correct(sudoku: list, column_no: int) -> bool:
-    
-    col = []
+    column = []
     for row in sudoku:
-        row_item = row[column_no]
-        col.append(row_item)
-    non_zero = [num for num in col if num != 0]
+        column.append(row[column_no])
+
+    non_zero = [num for num in column if num != 0]
     return len(non_zero) == len(set(non_zero))
