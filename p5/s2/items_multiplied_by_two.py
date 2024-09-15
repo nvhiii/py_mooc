@@ -13,8 +13,6 @@
 # original: [2, 4, 5, 3, 11, -4]
 # doubled: [4, 8, 10, 6, 22, -8]
 
-def double_items(numbers: list) -> list:
-    new_list = []
-    for num in numbers:
-        new_list.append(num*2)
+def double_items(numbers: list):
+    new_list = [num * 2 for num in numbers]
     return new_list
