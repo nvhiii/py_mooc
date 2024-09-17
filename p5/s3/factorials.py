@@ -14,13 +14,10 @@
 # 120
 
 def factorials(n: int):
-    f = {}
-    mult = 1
-    for i in range(1, n + 1):
-        if i == 1:
-            f[i] = mult
-        else:
-            mult *= i
-            f[i] = mult
+    facts = {}
+    init = 1
+    for idx in range(1, n+1):
+        init *= idx
+        facts[idx] = init
 
-    return f
+    return facts
