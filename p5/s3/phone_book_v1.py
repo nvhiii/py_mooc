@@ -28,30 +28,30 @@
 
 # NB: this exercise doesn't ask you to write any functions, so you should not place any code within an if __name__ == "__main__" block.
 
-def add(pb: dict, name: str, num: str):  # 'num' should be a string, not an int
-    pb[name] = num
-
-def search(pb: dict, name: str):
-    if name in pb:
-        print(pb[name])
-    else:
+def search(my_dict: dict, name: str):
+    if name not in my_dict:
         print("no number")
+    else:
+        print(f"{my_dict[name]}")
+
+def add(my_dict: dict, name: str, number: str):
+    my_dict[name] = number
+    print("ok!")
 
 def main():
-    pb = {}  # Initialize an empty phonebook
+    pb = {}
     while True:
-        val = int(input("command (1 search, 2 add, 3 quit): "))
-        if val == 3:
+        command = int(input("command (1 search, 2 add, 3 quit): "))
+        if command == 3:
             print("quitting...")
             break
-        elif val == 2:
+        if command == 1:
+            name = input("name: ")
+            search(pb, name)
+        elif command == 2:
             name = input("name: ")
             number = input("number: ")
-            add(pb, name, number)  # Call the 'add' function directly
-            print("ok!")
-        elif val == 1:
-            name = input("name: ")
-            search(pb, name)  # Call the 'search' function directly
+            add(pb, name, number)
 
 if __name__ == "__main__":
     main()
