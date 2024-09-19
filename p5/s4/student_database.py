@@ -97,16 +97,44 @@ def print_student(db: dict, student: str):
     
     print(f"{student}:")
     if not db[student]["courses"]: # checks if courses list is empty
-        print("\tno completed courses")
+        print(" no completed courses")
     else:
         count = len(db[student]["courses"])
         total = 0
-        print(f"\t{count} completed courses:")
+        print(f" {count} completed courses:")
         for course in db[student]["courses"]: # get each indiv tuple
             total += course[1]
-            print(f"\t\t{course[0]} {course[1]}")
-        print(f"\t average grade {total / count: .1f}")
+            print(f"  {course[0]} {course[1]}")
+        print(f" average grade{total / count: .1f}")
 
 def add_course(db: dict, student: str, course: tuple):
-    db[student]["courses"].append(course)
+    if not course[1] == 0: # proceed only if grade is nonzero
+        for i, existing_course in enumerate(db[student]["courses"]):
+            if existing_course[0] == course[0]:
+                if existing_course[1] < course[1]:
+                    db[student]["courses"][i] = course # updates ith course from enum
+                return
+        db[student]["courses"].append(course)
 
+def summary(db: dict):
+    highest = 0
+    highest_student = ""
+
+    best_avg = 0
+    avg_student = ""
+
+    for student in db:
+        if len(db[student]["courses"]) > highest:
+            highest = len(db[student]["courses"])
+            highest_student = student
+
+        if len(db[student]["courses"]) > 0:
+            total = sum(course[1] for course in db[student]["courses"])
+            avg = total / len(db[student]["courses"])
+            if avg > best_avg:
+                best_avg = avg
+                avg_student = student
+
+    print(f"students {len(db)}")
+    print(f"most courses completed {highest} {highest_student}")
+    print(f"best average grade {best_avg} {avg_student}")
