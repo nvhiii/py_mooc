@@ -72,3 +72,41 @@
 # students 2
 # most courses completed 3 Peter
 # best average grade 4.5 Eliza
+
+# def add_student(db: dict, name: str):
+#     if name not in db:
+#         db[name] = {"courses": []}
+
+# def print_student(db: dict, name: str):
+#     if name not in db:
+#         print(f"{name}: no such person in the database")
+#     print(f"{name}:")
+#     if not db[name]["courses"]:
+#         print("no completed courses")
+
+def add_student(db: dict, student: str):
+    if student not in db:
+        db[student] = {
+            "courses": []
+        }
+
+def print_student(db: dict, student: str):
+    if student not in db:
+        print(f"{student}: no such person in the database")
+        return
+    
+    print(f"{student}:")
+    if not db[student]["courses"]: # checks if courses list is empty
+        print("\tno completed courses")
+    else:
+        count = len(db[student]["courses"])
+        total = 0
+        print(f"\t{count} completed courses:")
+        for course in db[student]["courses"]: # get each indiv tuple
+            total += course[1]
+            print(f"\t\t{course[0]} {course[1]}")
+        print(f"\t average grade {total / count: .1f}")
+
+def add_course(db: dict, student: str, course: tuple):
+    db[student]["courses"].append(course)
+
