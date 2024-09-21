@@ -17,33 +17,29 @@
 
 # NB: If Visual Studio Code can't find the file and you have checked that there are no spelling errors, take a look at the instructions before this exercise.
 
+def matrix_list(file_name="matrix.txt"):
+    with open(file_name) as new_file:
+        m = [int(x) for line in new_file for x in line.strip().split(",")]
+    return m
+
+def matrix_rows(file_name="matrix.txt"):
+    with open(file_name) as new_file:
+        m = [[int(x) for x in line.strip().split(",")] for line in new_file]
+    return m
+
 def matrix_sum():
-    with open("matrix.txt") as new_file:
-        for line in new_file:
-            parts = line.strip().split(",")
-
-    int_list = [int(x) for x in parts]
-    total = sum(int_list)
-    return total
-
+    return sum(matrix_list())
 
 def matrix_max():
-    with open("matrix.txt") as new_file:
-        for line in new_file:
-            parts = line.split(",")
+    return max(matrix_list())
 
-    int_list = [int(x) for x in parts]
-    biggest = max(int_list)
-    return biggest
+def row_sums():
+    m = matrix_rows()
+    return [sum(row) for row in m]
 
-def row_sums() -> list:
-    sums = []
-    with open("matrix.txt") as new_file:
-        for line in new_file:
-            line = line.replace("\n")
-            line = line.split(",")
-            sums.append(sum(int(x) for x in line))
+def main():
+    matrix()
 
-    return sums
-            
+if __name__ == "__main__":
+    main()
 

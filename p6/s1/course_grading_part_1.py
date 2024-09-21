@@ -51,27 +51,37 @@
 
 # NB2: If Visual Studio can't find the file and you have checked that there are no spelling errors, take a look at these instructions.
 
-def course_grading():
-    student_info = input("Student information: ")
-    exercises_completed = input("Exercises completed: ")
-
+def grade_courses(file_one: str, file_two: str):
+    
     students = {}
-    with open(student_info) as new_file:
+    with open(file_one) as new_file:
         for line in new_file:
+            line = line.strip()
             parts = line.split(";")
-            if parts[0] == "id": # skip first row
+            if parts[0] == "id":
                 continue
             students[parts[0]] = parts[1] + " " + parts[2]
-
+    
     exercises = {}
-    with open(exercises_completed) as another_file:
-        for line in new_file:
+    with open(file_two) as nf:
+        for line in nf:
+            line = line.strip()
             parts = line.split(";")
-            if parts[0] == "id": # skip first row
+            if parts[0] == "id":
                 continue
             exercises[parts[0]] = sum(int(x) for x in parts[1:])
 
-    for id, name in students.items():
-        if id in exercises:
-            total_exercises = exercises[id]
-            print(f"{name} {total_exercises}")
+    for i in students: # this iterates over id, not student name
+        print(f"{students[i]} {exercises[i]}") # students[i] gets the value pair to the key
+
+def main():
+    if False:
+        # this is never executed
+        student_info = input("Student information: ")
+        exercise_data = input("Exercises completed: ")
+    else:
+        # hard-coded input
+        student_info = "students1.csv"
+        exercise_data = "exercises1.csv"
+        grade_courses(student_info, exercise_data)
+
