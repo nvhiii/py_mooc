@@ -72,7 +72,10 @@ def grade_courses(file_one: str, file_two: str):
             exercises[parts[0]] = sum(int(x) for x in parts[1:])
 
     for i in students: # this iterates over id, not student name
-        print(f"{students[i]} {exercises[i]}") # students[i] gets the value pair to the key
+        if not exercises[i]:
+            print("no exercises completed")
+        else:
+            print(f"{students[i]} {exercises[i]} exercises completed") # students[i] gets the value pair to the key
 
 def main():
     if False:
@@ -80,8 +83,9 @@ def main():
         student_info = input("Student information: ")
         exercise_data = input("Exercises completed: ")
     else:
-        # hard-coded input
         student_info = "students1.csv"
         exercise_data = "exercises1.csv"
         grade_courses(student_info, exercise_data)
 
+if __name__ == "__main__":
+    main()
