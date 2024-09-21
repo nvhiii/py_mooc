@@ -118,3 +118,13 @@ def search_by_name(filename: str, word: str):
     recipes = recipe_list(filename)
     found = [recipe["name"] for recipe in recipes if word.lower() in recipe["name"].lower()]
     return found
+
+def search_by_time(filename: str, prep_time: int):
+    recipes = recipe_list(filename)
+    found = [f"{recipe['name']}, preparation time {recipe['time']} min" for recipe in recipes if recipe["time"] <= prep_time]
+    return found
+
+def search_by_ingredient(filename: str, ingredient: str):
+    recipes = recipe_list(filename)
+    found = [f"{recipe['name']}, preparation time {recipe['time']} min" for recipe in recipes if ingredient in recipe["ingredients"]]
+    return found
