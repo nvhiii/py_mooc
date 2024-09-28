@@ -110,10 +110,11 @@ def print_student(db: dict, student: str):
 def add_course(db: dict, student: str, course: tuple):
     if not course[1] == 0: # proceed only if grade is nonzero
         for i, existing_course in enumerate(db[student]["courses"]):
-            if existing_course[0] == course[0]:
+            if existing_course[0] == course[0]: # check if the course to be added
+                # is already in the dict
                 if existing_course[1] < course[1]:
                     db[student]["courses"][i] = course # updates ith course from enum
-                return
+                return # exits function here, because if this path is taken, course alr exists and is updated., no need to append the course again
         db[student]["courses"].append(course)
 
 def summary(db: dict):
