@@ -117,7 +117,7 @@ def grade_courses(file_one: str, file_two: str, file_three: str, file_four: str)
     with open("results.txt", "w") as results:
         h = len(f"{headers[0]}, {headers[1]} credits")
         results.write(f"{headers[0]}, {headers[1]} credits\n")
-        results.write("="*h) # prints out = sign as long as the header text
+        results.write(f"{"="*h}\n") # prints out = sign as long as the header text
         results.write(f"{'name':30}{'exec_nbr':10}{'exec_pts.':10}{'exam_pts.':10}{'total_pts.':10}{'grade':10}\n")
         for sid in students:
             results.write(f"{students[sid]:30}{exercises[sid]:<10}{exer_points[sid]:<10}{exam_points[sid]:<10}{total_pts[sid]:<10}{grades[sid]:<10}\n")
@@ -133,11 +133,13 @@ def main():
         student_info = input("Student information: ")
         exercise_data = input("Exercises completed: ")
         exam_points = input("Exam points: ")
+        course = input("Course info: ")
     else:
         student_info = "students1.csv"
         exercise_data = "exercises1.csv"
         exam_points = "exam_points1.csv"
-        grade_courses(student_info, exercise_data, exam_points)
+        course = "course1.txt"
+        grade_courses(student_info, exercise_data, exam_points, course)
 
 if __name__ == "__main__":
     main()
