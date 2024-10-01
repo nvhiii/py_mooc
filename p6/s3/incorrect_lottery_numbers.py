@@ -31,34 +31,39 @@
 # Please write a function named filter_incorrect(), which creates a file called correct_numbers.csv. The file should contain only those lines from the original file which are in the correct format.
 
 def filter_incorrect():
+    # for every place you can possibly have a exception, use a try except
     try:
-        vals = []
-        with open("lottery_numbers.csv") as lotto: # read + populate lotto dict
+        weekly_lotto = []
+        with open("lottery_numbers.csv") as lotto:
             for line in lotto:
                 try:
                     line = line.strip()
-                    parts = line.split(";") # week x; [list of nums]
+                    parts = line.split(";")
 
-                    week = parts[0].split(" ")
-                    if len(week) != 2 or not week[1].isdigit():
-                        raise ValueError("The week number is incorrect") # not a valid value
-                    week_num = int(week[1])
-
+                    # isolate the week x part
+                    week_n_num = parts[0].split(" ")
+                    if not week_n_num[1].isdigit():
+                        raise ValueError("Week # is a not a valid number")
+                    
+                    # convert parts 1 into list of nums
                     nums = list(map(int, parts[1].split(",")))
                     if len(nums) != 7:
-                        raise ValueError("There should be 7 numbers")
-                    if max(nums) > 39 or min(nums) < 1:
-                        raise ValueError("Numbers either too large or small")
+                        raise ValueError("Not enough weekly nums")
+                    if min(nums) < 0 or max(nums) > 39:
+                        raise ValueError("Numbers too big or small")
                     if len(set(nums)) != len(nums):
-                        raise ValueError("Repeated values in the 7 numbers")
+                        raise ValueError("Same values exist")
+                    
+                    weekly_lotto.append(line)
 
-                    vals.append(line) # since exceptionss take care of invalid input, this works fine
+                    with open("correct_numbers.csv", "w") as correct:
+                        for val in weekly_lotto:
+                            correct.write(f"{val}\n")
 
                 except ValueError as e:
-                    print(f"Skipping due to error: {e}")
+                    print(f"Error raised by {e}") # this catches the error where the 
+                    # list of nums may not have a num
+                    continue
 
-        with open("correct_numbers.csv", "w") as correct:
-            for item in vals:
-                correct.write(f"{item}\n")
     except FileNotFoundError:
         pass
