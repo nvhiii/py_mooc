@@ -19,18 +19,56 @@
 # 120488+246L
 # 310823A9877
 
-from datetime import datetime, timedelta
+from datetime import datetime
 def is_it_valid(pic: str):
-    # split data
-    dob = pic[0:6] # ddmmyy format
-    century = pic[6] # X
-    identifier = pic[7:10] # yyy
-    control = pic[-1] # z
+    # first split string given
+    # ddmmyyXyyyz is expected
+    day = pic[:2]
+    month = pic[2:4]
+    year = pic[4:6]
 
-    # now since thats all strings, convert to int
+    if len(pic) != 11:
+        return False
 
-    # then century market check
+    # since need 4 digit century in order to use datetime constructor, need to do century logic first
+     # fetch X from string
+    century = pic[6]
+    if century == "+":
+        my_year = "18" + year
+    elif century == "-":
+        my_year = "19" + year
+    elif century == "A":
+        my_year = "20" + year
+    else:
+        return False
 
-    # try except block
+    # convert to int
+    i_day = int(day)
+    i_month = int(month)
+    i_year = int(my_year)
 
-    # calc control using string ascii uppercase + digits or hardcode string from exercise
+    try:
+        date = datetime(i_year, i_month, i_day)
+    except ValueError:
+        return False
+    
+    # fetch yyy from string
+    identifier = pic[7:10]
+    # Should i use a error here?
+
+    # calc control
+    dob_identifier = day + month + year + identifier # gives 9 digit string
+    tester_string = "0123456789ABCDEFHJKLMNPRSTUVWXY"
+    try:
+        i_dob_identifier = int(dob_identifier)
+    except ValueError:
+        return False
+
+    control = tester_string[i_dob_identifier%31] # calculate index then pick from string
+    if control != pic[-1]:
+        return False
+    
+    return True
+
+    # keep in mind htis is a bool fxn, need to return false for the diff parts if fail
+    # otherwise return true, THats what i need to fix
