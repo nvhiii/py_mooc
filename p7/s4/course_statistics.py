@@ -119,7 +119,7 @@ def retrieve_course(course_name: str):
     hours = 0
     exercises = 0
     for item in course_data:
-        if int(item["students"]) > students:
+        if int(item["students"  ]) > students:
             students = int(item["students"])
         hours += int(item["hours"])
         exercises += int(item["exercises"])
