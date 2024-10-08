@@ -88,9 +88,10 @@
 
 # NB2: The Python math module has a useful function for rounding down integers.
 
-import urllib.request
 import json
 import ssl
+import urllib.request
+import math
 def retrieve_all():
     context = ssl._create_unverified_context()
     url = "https://studies.cs.helsinki.fi/stats-mock/api/courses"
@@ -98,23 +99,42 @@ def retrieve_all():
         data = response.read().decode('utf-8')
 
     courses = json.loads(data)
-
-    enabled = []
+    # now retrieve active courses
+    active_courses = []
     for course in courses:
-        if course["enabled"]:
-            sum_exercises = sum(course["exercises"])
-            enabled.append(course["fullName"], course["name"], course["year"], sum_exercises)
+        if course["enabled"]: # dont need == True
+            active_courses.append((course["fullName"], course["name"], course["year"], sum(course["exercises"])))
 
-    return enabled
+    return active_courses
 
-def retrieve_course(course_name: str): 
+def retrieve_course(course_name: str):
     context = ssl._create_unverified_context()
     url = f"https://studies.cs.helsinki.fi/stats-mock/api/courses/{course_name}/stats"
     with urllib.request.urlopen(url, context=context) as response:
         data = response.read().decode('utf-8')
 
-    course_info = json.loads(data)
-    
-    # stats
+    course_data = json.loads(data)
+    weeks = len(course_data)
+    students = 0
+    hours = 0
+    exercises = 0
+    for item in course_data:
+        if int(item["students"]) > students:
+            students = int(item["students"])
+        hours += int(item["hours"])
+        exercises += int(item["exercises"])
 
-retrieve_course("docker2019")
+    hours_avg = math.floor(hours / students) if students > 0 else 0
+    exercises_avg = math.floor(exercises / students) if students > 0 else 0
+
+    return {
+        'weeks': weeks,
+        'students': students,
+        'hours': hours,
+        'hours_average': hours_avg,
+        'exercises': exercises,
+        'exercises_average': exercises_avg
+    }
+
+course = retrieve_course("docker2019")
+print(course)
