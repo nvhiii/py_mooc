@@ -44,12 +44,12 @@ def change_case(orig_string: str) -> str:
 def split_in_half(orig_string: str) -> tuple:
     length = len(orig_string)
     half_len = length // 2
-    return orig_string[:half_len+1] # How can i turn this into a tuple???
+    return orig_string[:half_len], orig_string[half_len:] # How can i turn this into a tuple???
+
 
 def remove_special_character(orig_string: str) -> str:
-    specials = punctuation
-    
-
+    allowed_char = [char for char in orig_string if char.isalnum() or char == ' ']
+    return "".join(allowed_char)
     
 
 
