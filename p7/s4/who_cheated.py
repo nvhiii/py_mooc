@@ -41,6 +41,7 @@ def cheaters():
                         cheats.append(name)
 
     return cheats
+    
 
 if __name__ == "__main__":
     cheaters()
