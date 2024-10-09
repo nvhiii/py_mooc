@@ -27,6 +27,6 @@ def smallest_average(person1: dict, person2: dict, person3: dict):
     avg_p3 = (person3["result1"] + person3["result2"] + person3["result3"]) / 3
     persons = [(person1, avg_p1), (person2, avg_p2), (person3, avg_p3)]
     
-    min_avg = min(persons, key=lambda x: x[1])
+    min_avg = min(persons, key=lambda x: x[1]) # 
     return min_avg[0]
 
