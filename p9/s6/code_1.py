@@ -188,3 +188,68 @@
 # ABC Book (2 kg)
 # Nokia 3210 (1 kg)
 # Brick (4 kg)
+
+class Item:
+    def __init__(self, name: str, weight: int):
+        self.__name = name
+        self.__weight = weight
+
+    @property
+    def weight(self):
+        return self.__weight
+
+    @property
+    def name(self):
+        return self.__name
+
+    def __str__(self):
+        return f"{self.__name} ({self.__weight} kg)"  # formatted item instance
+
+
+class Suitcase:
+    def __init__(self, maximum_weight: int):
+        self.__maximum_weight = maximum_weight
+        self.__case = []
+
+    def add_item(self, item: "Item"):
+        curr = self.weight()
+        if curr + item.weight <= self.__maximum_weight:  # Access weight as a property
+            self.__case.append(item)
+
+    def print_items(self):
+        for item in self.__case:
+            print(item)
+
+    def weight(self):
+        return sum([x.weight for x in self.__case])  # Directly sum the weights
+
+    def heaviest_item(self):
+        if not self.__case:
+            return None
+        return max(self.__case, key=lambda item: item.weight)  # Access weight as a property
+
+    def __str__(self):
+        weight_case = self.weight()
+        num_items = len(self.__case)
+        if num_items == 1:
+            return f"{num_items} item ({weight_case} kg)"  # Correct plurality
+        return f"{num_items} items ({weight_case} kg)"
+
+
+class CargoHold:
+    def __init__(self, maximum_weight: int):
+        self.__maximum_weight = maximum_weight
+        self.__hold = []
+
+    def add_suitcase(self, case: "Suitcase"):
+        curr = sum([x.weight() for x in self.__hold])  # Calculate the current weight in the hold
+        if curr + case.weight() <= self.__maximum_weight:
+            self.__hold.append(case)
+
+    def print_items(self):
+        for case in self.__hold:
+            case.print_items()
+
+    def __str__(self):
+        curr_weight = sum([x.weight() for x in self.__hold])
+        return f"{len(self.__hold)} suitcases, space for {self.__maximum_weight - curr_weight} kg"  # Use 'suitcases' for consistency
