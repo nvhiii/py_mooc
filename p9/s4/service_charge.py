@@ -12,7 +12,7 @@
 # You may use the following code for testing your class:
     
 # account = BankAccount("Randy Riches", "12345-6789", 1000)
-# account.withdraw(100)
+# account.withdraw(100) 
 # print(account.balance)
 # account.deposit(100)
 # print(account.balance)
