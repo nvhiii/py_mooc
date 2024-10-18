@@ -73,7 +73,7 @@ class RockPaperScissors(WordGame):
             "rock": "scissors",
             "scissors": "paper",
             "paper": "rock"
-        }
+        } # w : l 
 
         # handle case 1 input is invalid
         if not player1_word in valid and player2_word in valid:
