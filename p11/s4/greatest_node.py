@@ -29,16 +29,14 @@ class Node:
 # 11
 
 def greatest_node(root: "Node"):
-    root_val = root.value
+    rn = root.value
 
-    # Initialize greatest values for left and right subtrees
-    lg = root_val
-    if root.left_child is not None:  # Check if the left child exists
-        lg = greatest_node(root.left_child)  # Recursively find the greatest in the left subtree
+    greatest_left_node = 0
+    if not root.left_child is None:
+        greatest_left_node = greatest_node(root.left_child)
 
-    rg = root_val
-    if root.right_child is not None:  # Check if the right child exists
-        rg = greatest_node(root.right_child)  # Recursively find the greatest in the right subtree
+    greatest_right_node = 0
+    if not root.right_child is None:
+        greatest_right_node = greatest_node(root.right_child)
 
-    # Return the maximum value between root, left subtree, and right subtree
-    return max(root_val, lg, rg)
+    return max(rn, greatest_left_node, greatest_right_node)
